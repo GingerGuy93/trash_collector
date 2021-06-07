@@ -8,7 +8,7 @@
     <form action="{% url 'employees:create' %}" method="post">
     {% csrf_token %}
         <label>Name:</label><input type="text" name="name" id="name"><br>
-        <label>user:</label><input type="text" name="user" id="user"><br>
+        <label>User:</label><input type="text" name="user" id="user"><br>
         <label>Zip Code:</label><input type="text" name="zip_code" id="zip_code"><br>
         <input type="submit" value="Submit" />
     </form>
