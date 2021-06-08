@@ -58,14 +58,3 @@ def customer_in_zip(request):
     return render(request, 'employees/customer_in_zip.html', context)
 
 
-def define_day(request):
-    if request.method == 'POST':
-        user = request.user
-        employee = Employees.objects.get(user_id=user.id)
-        employee.define_day = request.POST.get('define_day')
-        employee.save()
-        return HttpResponseRedirect(reverse('employees:index'))
-
-    return render(request, 'employees/index.html')
-
-
