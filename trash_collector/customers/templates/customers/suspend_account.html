@@ -8,7 +8,7 @@
 {% block content %}
   {% if user.is_authenticated %}
 
-    <form action="{% url 'customers:suspend_account`' %}" method="post">
+    <form action="{% url 'customers:suspend_account' %}" method="post">
         {% csrf_token %}
         <h1>Start Date:<input type="date" name="suspension_start" id="suspension_start" value="{{customer.suspension_start}}"><br></h1>
         <h1>End Date:<input type="date" name="suspension_end" id="suspension_end" value="{{customer.suspension_end}}"><br></h1>

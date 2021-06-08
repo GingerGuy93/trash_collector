@@ -10,5 +10,6 @@ urlpatterns = [
     path('sign_up/', views.sign_up, name="sign_up"),
     path('change/', views.change, name='change'),
     path('one_time_pickup/', views.one_time_pickup, name='one_time_pickup'),
-    path('suspend_account/', views.suspend_account, name='suspend_account'),
+    path('account_info/', views.account_info, name='account_info'),
+    path('suspend_account/', views.suspend_account, name="suspend_account"),
 ]
