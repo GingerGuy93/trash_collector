@@ -28,3 +28,14 @@ def sign_up(request):
         return HttpResponseRedirect(reverse('customers:index'))
     else:
         return render(request, 'customers/sign_up.html')
+
+
+def change(request):
+    user = request.user
+    specific_customer = Customer.objects.get(user_id=user.id)
+    if request.method == 'POST':
+        specific_customer.pickup_day = request.POST.get('pickup_day')
+        specific_customer.save()
+        return HttpResponseRedirect(reverse('customers:index'))
+    else:
+        return render(request, 'customers/change.html')

@@ -27,3 +27,5 @@ def create(request):
         return HttpResponseRedirect(reverse('employees:index'))
     else:
         return render(request, 'employees/create.html')
+
+
