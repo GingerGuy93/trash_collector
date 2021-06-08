@@ -57,3 +57,13 @@ def one_time_pickup(request):
         return HttpResponseRedirect(reverse('customers:index'))
     else:
         return render(request, 'customers/one_time_pickup.html')
+
+
+def account_info(request):
+    user = request.user
+    detail = Customer.objects.get(user_id=user.id)
+    context = {
+        'detail': detail
+    }
+
+    return render(request, 'customers/account_info.html', context)
