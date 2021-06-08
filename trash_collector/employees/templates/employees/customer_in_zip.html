@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{% block header %}Customers in Route {% endblock %}{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    Hello {{ user.username }} The following are your pick up routes
+{% for customer in customers %}
+<ul>
+    <li><h3>Name: {{customer.name}}<br></h3>
+        <h3>address: {{customer.address}} <br></h3>
+    </li>
+  </ul>
+{% endfor %}
+  {% else %}
+    <p>You are at the employee index, but you are not logged in.</p>
+    <a href="{% url 'login' %}">Log In</a>
+    <a href="{% url 'accounts:register' %}">Sign Up</a>
+  {% endif %}
+{% endblock %}

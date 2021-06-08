@@ -4,6 +4,7 @@ from django.apps import apps
 from .models import Employees
 from datetime import date
 from django.urls import reverse
+import datetime
 
 
 # Create your views here.
@@ -38,3 +39,15 @@ def confirm_pickup(request, customer_id):
         'customer': customer
     }
     return render(request, 'employees/confirm.html', context)
+
+
+def customer_in_zip(request):
+    user = request.user
+    Customer = apps.get_model('customers.Customer')
+    all_customers = Customer.objects.all()
+    in_zip = []
+    context = {'customer': in_zip}
+    for customer in all_customers:
+        if customer.zipcode == Employees.zip_code:
+            in_zip.append(customer)
+    return render(request, 'employees/customer_in_zip.html', context)
