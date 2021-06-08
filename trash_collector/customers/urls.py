@@ -8,5 +8,6 @@ app_name = "customers"
 urlpatterns = [
     path('', views.index, name="index"),
     path('sign_up/', views.sign_up, name="sign_up"),
-    path('change/', views.change, name='change')
+    path('change/', views.change, name='change'),
+    path('suspend/', views.suspend_account, name='suspend'),
 ]

@@ -39,3 +39,15 @@ def change(request):
         return HttpResponseRedirect(reverse('customers:index'))
     else:
         return render(request, 'customers/change.html')
+
+
+def suspend_account(request):
+    if request.method == 'POST':
+        user = request.user
+        customer = Customer.objects.get(user_id=user.id)
+        customer.suspension_start = request.POST.get('suspension_start')
+        customer.suspension_end = request.POST.get('suspension_end')
+        customer.save()
+        return HttpResponseRedirect(reverse('customers:index'))
+    else:
+        return render(request, 'customers/suspend_account.html')
