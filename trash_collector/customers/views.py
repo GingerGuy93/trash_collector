@@ -13,8 +13,15 @@ def index(request):
     # It will be necessary while creating a customer/employee to assign the logged-in user as the user foreign key
     # This will allow you to later query the database using the logged-in user,
     # thereby finding the customer/employee profile that matches with the logged-in user.
-    print(user)
-    return render(request, 'customers/index.html')
+    try:
+        logged_in_customer = Customer.objects.get(user=user)
+        context = {
+            'logged_in_customer': logged_in_customer
+        }
+    except:
+        return HttpResponseRedirect(reverse('customers:sign_up'))
+
+    return render(request, 'customers/index.html', context)
 
 
 def sign_up(request):
@@ -23,7 +30,7 @@ def sign_up(request):
         pickup_day = request.POST.get('pickup_day')
         address = request.POST.get('address')
         zipcode = request.POST.get('zipcode')
-        new_account = Customer(name=name, pickup_day=pickup_day, address=address, zipcode=zipcode)
+        new_account = Customer(user=request.user, name=name, pickup_day=pickup_day, address=address, zipcode=zipcode)
         new_account.save()
         return HttpResponseRedirect(reverse('customers:index'))
     else:
@@ -41,6 +48,17 @@ def change(request):
         return render(request, 'customers/change.html')
 
 
+def one_time_pickup(request):
+    user = request.user
+    specific_customer = Customer.objects.get(user_id=user.id)
+    if request.method == 'POST':
+        specific_customer.one_time_pickup = request.POST.get('one_time_pickup')
+        specific_customer.save()
+        return HttpResponseRedirect(reverse('customers:index'))
+    else:
+        return render(request, 'customers/one_time_pickup.html')
+
+
 def suspend_account(request):
     if request.method == 'POST':
         user = request.user
@@ -48,6 +66,7 @@ def suspend_account(request):
         customer.suspension_start = request.POST.get('suspension_start')
         customer.suspension_end = request.POST.get('suspension_end')
         customer.save()
+
         return HttpResponseRedirect(reverse('customers:index'))
     else:
         return render(request, 'customers/suspend_account.html')

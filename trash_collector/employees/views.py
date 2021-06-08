@@ -29,7 +29,6 @@ def create(request):
         return render(request, 'employees/create.html')
 
 
-
 def confirm_pickup(request, customer_id):
     Customer = apps.get_model('customers.Customer')
     customer = Customer.objects.get(pk=customer_id)
@@ -39,4 +38,3 @@ def confirm_pickup(request, customer_id):
         'customer': customer
     }
     return render(request, 'employees/confirm.html', context)
-
