@@ -75,6 +75,7 @@ def suspend_account(request):
     if request.method == 'POST':
         customer.suspension_start = request.POST.get('suspension_start')
         customer.suspension_end = request.POST.get('suspension_end')
+        customer.suspension = True
         customer.save()
         return HttpResponseRedirect(reverse('customers:index'))
     else:
