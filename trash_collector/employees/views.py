@@ -43,11 +43,27 @@ def confirm_pickup(request, customer_id):
 
 def customer_in_zip(request):
     user = request.user
+    employee = Employees.objects.get(user_id=user.id)
     Customer = apps.get_model('customers.Customer')
-    all_customers = Customer.objects.all()
-    in_zip = []
-    context = {'customer': in_zip}
-    for customer in all_customers:
-        if customer.zipcode == Employees.zip_code:
-            in_zip.append(customer)
+    customers = Customer.objects.all()
+    same_zip = []
+    for customer in customers:
+        if customer.zipcode == employee.zip_code:
+            same_zip.append(customer)
+            context = {
+                'customers': same_zip
+            }
     return render(request, 'employees/customer_in_zip.html', context)
+
+
+def define_day(request):
+    if request.method == 'POST':
+        user = request.user
+        employee = Employees.objects.get(user_id=user.id)
+        employee.define_day = request.POST.get('define_day')
+        employee.save()
+        return HttpResponseRedirect(reverse('employees:index'))
+
+    return render(request, 'employees/index.html')
+
+
