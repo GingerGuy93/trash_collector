@@ -67,3 +67,18 @@ def account_info(request):
     }
 
     return render(request, 'customers/account_info.html', context)
+
+
+def suspend_account(request):
+    user = request.user
+    customer = Customer.objects.get(user_id=user.id)
+    if request.method == 'POST':
+        customer.suspension_start = request.POST.get('suspension_start')
+        customer.suspension_end = request.POST.get('suspension_end')
+        customer.save()
+        return HttpResponseRedirect(reverse('customers:index'))
+    else:
+        context = {
+            'customer': customer
+        }
+        return render(request, 'customers/suspend_account.html', context)
