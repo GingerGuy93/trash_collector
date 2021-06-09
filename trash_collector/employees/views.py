@@ -4,20 +4,28 @@ from django.apps import apps
 from .models import Employees
 from datetime import date
 from django.urls import reverse
-import datetime
 
 
 # Create your views here.
 
 # TODO: Create a function for each path created in employees/urls.py. Each will need a template as well.
 
-
 def index(request):
     # This line will get the Customer model from the other app, it can now be used to query the db
-    Customer = apps.get_model('customers.Customer')
     user = request.user
-    this_employee = Employees.objects.get(user_id=user.id)
-    return render(request, 'employees/index.html')
+    employee = Employees.objects.get(user_id=user.id)
+    Customer = apps.get_model('customers.Customer')
+    customers = Customer.objects.all()
+    customers_today = []
+    today = date.today()
+    for customer in customers:
+        if customer.zipcode == employee.zip_code and customer.suspension == False and\
+                customer.pickup_day == today.strftime('%A') or customer.one_time_pickup == today:
+            customers_today.append(customer)
+            context = {
+                'customers': customers_today
+            }
+    return render(request, 'employees/index.html', context)
 
 
 def create(request):
@@ -41,21 +49,6 @@ def confirm_pickup(request, customer_id):
         'customer': customer
     }
     return render(request, 'employees/confirm.html', context)
-
-
-def customer_in_zip(request):
-    user = request.user
-    employee = Employees.objects.get(user_id=user.id)
-    Customer = apps.get_model('customers.Customer')
-    customers = Customer.objects.all()
-    same_zip = []
-    for customer in customers:
-        if customer.zipcode == employee.zip_code:
-            same_zip.append(customer)
-            context = {
-                'customers': same_zip
-            }
-    return render(request, 'employees/customer_in_zip.html', context)
 
 
 def define_day(request):

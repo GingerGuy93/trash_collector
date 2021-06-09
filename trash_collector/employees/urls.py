@@ -9,5 +9,4 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('create/', views.create, name='create'),
     path('confirm_pickup/<int:customer_id>/', views.confirm_pickup, name='confirm_pickup'),
-    path('customer_in_zip/', views.customer_in_zip, name='customer_in_zip'),
 ]

@@ -4,7 +4,14 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-    Hello Employee {{ user.username }}!
+   <h1> Hello Employee {{ user.username }}! Below are the customers in your route today! Please make sure to confirm and charge all pickups!
+{% for customer in customers %}
+<ul>
+    <li><h3>Name: {{customer.name}}<br></h3>
+        <h3>address: {{customer.address}} <br></h3>
+    </li>
+  </ul>
+{% endfor %}
   {% else %}
     <p>You are at the employee index, but you are not logged in.</p>
     <a href="{% url 'login' %}">Log In</a>
