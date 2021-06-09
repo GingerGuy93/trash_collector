@@ -52,5 +52,3 @@ def confirm_pickup(request, customer_id):
 
 
 
-
-
