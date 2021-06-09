@@ -4,6 +4,7 @@ from django.apps import apps
 from .models import Employees
 from datetime import date
 from django.urls import reverse
+from django.db.models import Q
 
 
 # Create your views here.
@@ -11,8 +12,14 @@ from django.urls import reverse
 # TODO: Create a function for each path created in employees/urls.py. Each will need a template as well.
 
 def index(request):
-    # This line will get the Customer model from the other app, it can now be used to query the db
     user = request.user
+    try:
+        logged_in_employee = Employees.objects.get(user=user)
+        context = {
+            'logged_in_employee': logged_in_employee
+        }
+    except:
+        return HttpResponseRedirect(reverse('employees:create'))
     employee = Employees.objects.get(user_id=user.id)
     Customer = apps.get_model('customers.Customer')
     customers = Customer.objects.all()
@@ -26,6 +33,7 @@ def index(request):
                 'customers': customers_today
             }
     return render(request, 'employees/index.html', context)
+
 
 
 def create(request):
@@ -51,6 +59,19 @@ def confirm_pickup(request, customer_id):
     return render(request, 'employees/confirm.html', context)
 
 
-
-
-
+def filter_pickups(request):
+    customers = apps.get_model('customers.Customer')
+    employee = Employees.objects.get(user=request.user)
+    employee_customers = customers.objects.filter(zipcode=employee.zip_code)
+    if request.method == 'POST':
+        filtered_customers = customers.objects.filter(zipcode=employee.zip_code).filter(pickup_day=request.POST.get('pickup_day'))
+        context = {
+            'customers': filtered_customers,
+            'employee': employee
+        }
+        return render(request, 'employees/filter_pickups.html', context)
+    else:
+        context = {
+            'customers': employee_customers
+        }
+        return render(request, 'employees/filter_pickups.html', context)
