@@ -19,7 +19,7 @@
     <form action="{% url 'customers:sign_up' %}" method="post">
         {% csrf_token %}
         Name: <input type='text' name='name' id='name'><br>
-        Pick Up Day: <input type='text' name='pickup_day' id='pickup_day'><br>
+        Pick Up Day(Case Sensitive Capitalize First Letter): <input type='text' name='pickup_day' id='pickup_day'><br>
         Street Address: <input type='text' name='address' id='address'><br>
         Zip Code: <input type='text' name='zipcode' id='zipcode'><br>
         <input type="submit" value='Add Info'>
