@@ -4,7 +4,6 @@ from django.apps import apps
 from .models import Employees
 from datetime import date
 from django.urls import reverse
-from django.db.models import Q
 
 
 # Create your views here.
@@ -13,6 +12,7 @@ from django.db.models import Q
 
 def index(request):
     user = request.user
+
     try:
         logged_in_employee = Employees.objects.get(user=user)
         context = {
@@ -20,6 +20,7 @@ def index(request):
         }
     except:
         return HttpResponseRedirect(reverse('employees:create'))
+
     employee = Employees.objects.get(user_id=user.id)
     Customer = apps.get_model('customers.Customer')
     customers = Customer.objects.all()
@@ -33,7 +34,6 @@ def index(request):
                 'customers': customers_today
             }
     return render(request, 'employees/index.html', context)
-
 
 
 def create(request):
