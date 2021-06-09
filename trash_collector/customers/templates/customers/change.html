@@ -18,7 +18,7 @@
   <div class="jumbotron">
     <form action="{% url 'customers:change' %}" method="post">
         {% csrf_token %}
-        Pick Up Day: <input type='text' name='pickup_day' id='pickup_day'><br>
+        <h2 class=text-dark">Pick Up Day: <input type='text' name='pickup_day' id='pickup_day'><br></h2>
         <input type="submit" value='Update Pickup Day'>
     </form>
 </div>
