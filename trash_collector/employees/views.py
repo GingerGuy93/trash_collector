@@ -11,8 +11,16 @@ from django.urls import reverse
 # TODO: Create a function for each path created in employees/urls.py. Each will need a template as well.
 
 def index(request):
-    # This line will get the Customer model from the other app, it can now be used to query the db
     user = request.user
+
+    try:
+        logged_in_employee = Employees.objects.get(user=user)
+        context = {
+            'logged_in_employee': logged_in_employee
+        }
+    except:
+        return HttpResponseRedirect(reverse('employees:create'))
+
     employee = Employees.objects.get(user_id=user.id)
     Customer = apps.get_model('customers.Customer')
     customers = Customer.objects.all()
@@ -49,6 +57,4 @@ def confirm_pickup(request, customer_id):
         'customer': customer
     }
     return render(request, 'employees/confirm.html', context)
-
-
 
