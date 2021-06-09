@@ -51,14 +51,6 @@ def confirm_pickup(request, customer_id):
     return render(request, 'employees/confirm.html', context)
 
 
-def define_day(request):
-    if request.method == 'POST':
-        user = request.user
-        employee = Employees.objects.get(user_id=user.id)
-        employee.define_day = request.POST.get('define_day')
-        employee.save()
-        return HttpResponseRedirect(reverse('employees:index'))
 
-    return render(request, 'employees/index.html')
 
 
