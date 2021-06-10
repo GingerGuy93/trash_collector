@@ -5,10 +5,10 @@
 {% block header %} Register Account {% endblock %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post" class="form">
+  <h3>Sign up</h3>
+  <br><br>  <form method="post" class="form">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign Up</button>
+    <h4>{{ form.as_p }}</h4>
+    <button class="btn btn-success" type="submit">Sign Up</button>
   </form>
 {% endblock %}

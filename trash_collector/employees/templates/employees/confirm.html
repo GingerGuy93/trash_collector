@@ -6,9 +6,9 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-    Hello Employee {{ user.username }}!
-You have confirmed the pick up for {{customer.name}} at {{customer.address}}<br>
-{{customer.name}} account balance has increased to {{customer.account_balance}}
+    <br><h1><u>Hello {{ user.username }}!</u></h1><br>
+<h3>You have confirmed the pick up for {{customer.name}} at {{customer.address}}</h3><br><br>
+<h3><span style="text-decoration:underline">{{customer.name}}</span> account balance has increased to<span style="text-decoration:underline"> {{customer.user_account_balance}}</span></h3>
 
   {% else %}
     <p>You are at the employee index, but you are not logged in.</p>

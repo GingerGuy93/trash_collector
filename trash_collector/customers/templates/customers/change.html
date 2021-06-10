@@ -4,11 +4,11 @@
 {% block title %} New User Information {% endblock %}
 
 
-{% block header %} {{user.username}} Change the day of the week for your weekly pickup {% endblock %}
+{% block header %} {{user.username}}, Choose a New Pick Up Day {% endblock %}
 
 {% block content %}
   {% if user.is_authenticated %}
-    Please Enter Either Monday, Tuesday, Wednesday, Thursday, Friday.
+<br><br><h4>Please Enter Either Monday, Tuesday, Wednesday, Thursday, Friday.</h4><br><br>
   {% else %}
     <p>You are at the customer information page, but you are not logged in.</p>
     <a href="{% url 'login' %}">Log In</a>
@@ -19,7 +19,7 @@
     <form action="{% url 'customers:change' %}" method="post">
         {% csrf_token %}
         <h2 class=text-dark">Pick Up Day: <input type='text' name='pickup_day' id='pickup_day'><br></h2>
-        <input type="submit" value='Update Pickup Day'>
+        <input type="submit" class="btn btn-success" value='Update Pickup Day'>
     </form>
 </div>
 </div>

@@ -51,7 +51,7 @@ def create(request):
 def confirm_pickup(request, customer_id):
     Customer = apps.get_model('customers.Customer')
     customer = Customer.objects.get(pk=customer_id)
-    customer.account_balance += 5
+    customer.user_account_balance += 5
     customer.save()
     context = {
         'customer': customer

@@ -14,10 +14,14 @@ ul#nav {
 }
 
 h2 {
-color: black;
+    color: black;
 }
 
 form {
-text-align: left;
-margin-left: 300px;
+
+   text-align: left;
+   margin-left: 300px;
 }
+
+
+

@@ -7,14 +7,14 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-   <h3> Hello {{ user.username }}! <br></h3>
-
-   <h5> We Pride ourselves on being able to pick up your trash timely on a weekly basis <br>
+<br><h1><u>Hello {{ user.username }}!</u></h1><br>
+<div class="jumbotron">
+   <h2> We Pride ourselves on being able to pick up your trash timely on a weekly basis <br>
 
     If you would like to schedule a pickup on a certain day or change your weekly pickup day please use the links above <br>
 
-    You can also see you account balance by clicking on the Account Information link above <br></h5>
-
+    You can also see you account balance by clicking on the Account Information link above <br></h2>
+</div>
   {% else %}
     <p>You are at the customer index, but you are not logged in.</p>
     <a href="{% url 'login' %}">Log In</a>

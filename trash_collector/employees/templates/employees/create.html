@@ -4,14 +4,14 @@
 
 {% block content %}
   {% if user.is_authenticated %}
-    Hello {{ user.username }}!
-    <form action="{% url 'employees:create' %}" method="post">
+<h1>Hello {{ user.username }}!</h1>
+   <br><h3><form action="{% url 'employees:create' %}" method="post">
     {% csrf_token %}
         <label>Name:</label><input type="text" name="name" id="name"><br>
         <label>User:</label><input type="text" name="user" id="user"><br>
         <label>Zip Code:</label><input type="text" name="zip_code" id="zip_code"><br>
-        <input type="submit" value="Submit" />
-    </form>
+        <input class="btn btn-success" type="submit" value="Submit" />
+    </form></h3>
           {% else %}
     <p>You are not logged in.</p>
     <a href="{% url 'login' %}">Log In</a>

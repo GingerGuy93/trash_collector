@@ -10,9 +10,9 @@
 
     <form action="{% url 'customers:suspend_account' %}" method="post">
         {% csrf_token %}
-        <h1>Start Date:<input type="date" name="suspension_start" id="suspension_start" value="{{customer.suspension_start}}"><br></h1>
-        <h1>End Date:<input type="date" name="suspension_end" id="suspension_end" value="{{customer.suspension_end}}"><br></h1>
-        <h1><input type="submit" value="Submit Suspension"></h1>
+        <br><h3>Start Date:<input type="date" name="suspension_start" id="suspension_start" value="{{customer.suspension_start}}"><br></h3>
+        <h3>End Date:<input type="date" name="suspension_end" id="suspension_end" value="{{customer.suspension_end}}"><br></h3>
+        <input type="submit" class="btn btn-success" value="Submit Suspension">
     </form>
 {% else %}
   {% endif %}

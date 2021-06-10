@@ -6,14 +6,12 @@
 {% block header %} Filter Customers {% endblock %}
 
 {% block content %}
-<h1>Hello {{ user.username }}!</h1><br/>
-  {% for customer in customers %}
-    <h2>{{customer.name}} {{customer.address}} {{customer.pickup_day}}</h2><br/>
-  {% endfor %}
-<div>
-<form action="{% url 'employees:filter_pickups' %}" method="post">
+<br><h1><u>Hello {{ user.username }}</u></h1><br>
+<div class="container">
+    <div class="jumbotron">
+<h5><form action="{% url 'employees:filter_pickups' %}" method="post">
     {% csrf_token %}
-    <label>Pickup Day:</label>
+    <label><h2>Pickup Day:</h2></label>
     <select name="pickup_day">
         <option value="Monday">Monday</option>
         <option value="Tuesday">Tuesday</option>
@@ -22,7 +20,15 @@
         <option value="Friday">Friday</option>
         <option value="Saturday">Saturday</option>
     </select><br>
-    <input type="submit" value="Submit">
-</form>
+
+    <input class="btn btn-success float-right" type="submit" value="Submit">
+</form></h5>
 </div>
+    <div class="jumbotron">
+  {% for customer in customers %}
+    <h2>{{customer.name}} {{customer.address}} {{customer.pickup_day}}</h2><br/>
+  {% endfor %}
+</div>
+
+    </div>
 {% endblock %}

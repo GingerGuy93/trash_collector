@@ -19,36 +19,36 @@
     <nav class="navbar navbar-expand-sm bg-light justify-content-center">
        <ul class="navbar-nav" >
            <li class="nav-item">
-              <a class="nav-link" href="{% url 'customers:index' %}">Home</a>
+              <a class="nav-link text-success h5" href="{% url 'customers:index' %}">Home</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="{% url 'customers:change' %}">Change Pickup Day</a>
+              <a class="nav-link text-success h5" href="{% url 'customers:change' %}">Change Pickup Day</a>
           </li>
            <li class="nav-item">
-              <a class="nav-link" href="{% url 'customers:one_time_pickup' %}">Schedule One Time Pickup</a>
+              <a class="nav-link text-success h5" href="{% url 'customers:one_time_pickup' %}">Schedule One Time Pickup</a>
           </li>
            <li class="nav-item">
-              <a class="nav-link" href="{% url 'customers:account_info' %}">Account Information</a>
+              <a class="nav-link text-success h5" href="{% url 'customers:account_info' %}">Account Information</a>
           </li>
            <li class="nav-item">
-              <a class="nav-link" href="{% url 'customers:suspend_account' %}">Suspend Services</a>
+              <a class="nav-link text-success h5" href="{% url 'customers:suspend_account' %}">Suspend Services</a>
           </li>
        </ul>
-    </nav>
+    </nav><br>
     {% elif group.name == "Employees" %}
      <nav class="navbar navbar-expand-sm bg-light justify-content-center">
        <ul class="navbar-nav">
            <li class="nav-item">
-              <a class="nav-link" href="{% url 'employees:index' %}">Home</a>
+              <a class="nav-link text-success h5" href="{% url 'employees:index' %}">Home</a>
           </li>
            <li class="nav-item">
-              <a class="nav-link" href="{% url 'employees:filter_pickups' %}">Filter Daily Pickups</a>
+              <a class="nav-link text-success h5" href="{% url 'employees:filter_pickups' %}">Filter Daily Pickups</a>
           </li>
        </ul>
-    </nav>
+    </nav><br>
     {% endif %}
   {% endfor %}
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+    <button type="submit" class="btn btn-success"> <a class="text-white" href="{% url 'logout' %}"> Log Out</a></button>
 {% endif %}
   <main>
     <h1>{% block header %} {% endblock %}</h1>
