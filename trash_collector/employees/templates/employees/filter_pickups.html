@@ -25,9 +25,30 @@
 </form></h5>
 </div>
     <div class="jumbotron">
-  {% for customer in customers %}
-    <h2>{{customer.name}} {{customer.address}} {{customer.pickup_day}}</h2><br/>
-  {% endfor %}
+
+<!--<h2>{{customer.name}} {{customer.address}} {{customer.pickup_day}}</h2><br/>-->
+    {% for customer in customers %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Pick Up Day</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th scope="row">{{customer.id}}</th>
+      <td>{{customer.name}}</td>
+      <td>{{customer.address}}</td>
+      <td>{{customer.pickup_day}}</td>
+    </tr>
+    </tbody>
+</table>
+        {% endfor %}
 </div>
 
     </div>

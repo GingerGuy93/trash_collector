@@ -7,13 +7,38 @@
 <br><h1><u>Hello {{ user.username }}</u></h1><br>
     <h3>Below are the customers in your route today!<br>
     Please make sure to confirm and charge all pickups!</h3><br><br>
+<div class="container">
+<div class="jumbotron">
 {% for customer in customers %}
-<ul>
-    <li><h3>Name: {{customer.name}}<br></h3>
-        <h3>Address: {{customer.address}} <br></h3>
-        <button type="submit" class="btn btn-success"> <a class="text-white" href= "{% url 'employees:confirm_pickup' customer.id %}" > Confirm Pickup</a></button>
-    </li>
-  </ul>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+        <th scope="col">Confirmation</th>
+
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th scope="row">{{customer.id}}</th>
+      <td>{{customer.name}}</td>
+      <td>{{customer.address}}</td>
+      <td><button type="submit" class="btn btn-success"> <a class="text-white" href= "{% url 'employees:confirm_pickup' customer.id %}" > Confirm Pickup</a></button></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<!--<ul>-->
+<!--    <li><h3>Name: {{customer.name}}<br></h3>-->
+<!--        <h3>Address: {{customer.address}} <br></h3>-->
+<!--        <button type="submit" class="btn btn-success"> <a class="text-white" href= "{% url 'employees:confirm_pickup' customer.id %}" > Confirm Pickup</a></button>-->
+<!--    </li>-->
+<!--  </ul>-->
 {% endfor %}
   {% else %}
     <p>You are at the employee index, but you are not logged in.</p>
